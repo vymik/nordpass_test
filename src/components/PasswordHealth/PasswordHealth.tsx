@@ -9,6 +9,7 @@ import {Routes} from '~/constants';
 import itemHasWeakPassword from "~/utils/itemHasWeakPassword";
 import itemHasReusedPassword from "~/utils/itemHasReusedPassword";
 import { useUserContext } from '../UserContext';
+import itemHasOldPassword from '~/utils/itemHasOldPassword';
 
 const PasswordHealth = () => {
   const {
@@ -44,6 +45,9 @@ const PasswordHealth = () => {
         </Route>
         <Route path={Routes.Reused}>
           <List items={items.filter((item) => itemHasReusedPassword(item, items))}/>
+        </Route>
+        <Route path={Routes.Old}>
+          <List items={items.filter(itemHasOldPassword)}/>
         </Route>
       </Switch>
     </div>
