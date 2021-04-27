@@ -15,6 +15,10 @@ html, body, #app {
 
 .input {
   height: 32px;
+
+  &--invalid {
+    border-color: red;
+  }
 }
 
 .button {
@@ -32,6 +36,12 @@ html, body, #app {
 .loading-screen {
   @include flex-center;
   font-size: large;
+}
+
+.validation-message {
+  height: 16px;
+  font-size: 14px;
+  color: red;
 }
 
 .modal {
