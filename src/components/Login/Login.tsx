@@ -4,15 +4,10 @@ import {Routes} from '~/constants';
 import login from '~/services/login';
 import ErrorBlock from '../ErrorBlock';
 import ValidationMessage from '../ValidationMessage';
-
+import {FieldId} from './constants';
 import './login-style.scss';
-import { validatePassword } from './validatePassword';
-import { validateUsername } from './validateUsername';
-
-enum FieldId {
-  Username = 'username',
-  Password = 'password'
-}
+import {validatePassword} from './validatePassword';
+import {validateUsername} from './validateUsername';
 
 const Login = () => {
   const {push} = useHistory();
@@ -24,17 +19,17 @@ const Login = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {value, id} = event.target;
-    const isUsernameField = id === FieldId.Username
+    const isUsernameField = id === FieldId.Username;
     const setFieldValue = isUsernameField ? setUsername : setPassword;
     const setError = isUsernameField ? setUsernameError : setPasswordError;
-    const error = isUsernameField ? usernameError : passwordError; 
+    const error = isUsernameField ? usernameError : passwordError;
 
     setFieldValue(value);
 
     if (error) {
       setError('');
     }
-  }
+  };
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();

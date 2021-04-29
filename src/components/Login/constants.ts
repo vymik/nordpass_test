@@ -1,3 +1,8 @@
+export enum FieldId {
+    Username = 'username',
+    Password = 'password'
+  }
+
 export const USERNAME_VALIDATION_MESSAGES = {
   EMPTY: 'Please enter username',
   INVALID: 'Username contains invalid characters',
@@ -14,4 +19,4 @@ export const PASSWORD_VALIDATION_MESSAGES = {
 
 export const MIN_USERNAME_LENGTH = 3;
 export const MAX_USERNAME_LENGTH = 25;
-export const MIN_PASSWORD_LENGTH = 8;
+export const MIN_PASSWORD_LENGTH = 5;
