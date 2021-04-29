@@ -6,7 +6,13 @@ import ErrorBlock from '../ErrorBlock';
 import ValidationMessage from '../ValidationMessage';
 
 import './login-style.scss';
+import { validatePassword } from './validatePassword';
 import { validateUsername } from './validateUsername';
+
+enum FieldId {
+  Username = 'username',
+  Password = 'password'
+}
 
 const Login = () => {
   const {push} = useHistory();
@@ -16,23 +22,35 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState<string>();
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {value} = event.target;
-    setUsername(value);
-    if (usernameError) {
-      setUsernameError('');
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {value, id} = event.target;
+    const isUsernameField = id === FieldId.Username
+    const setFieldValue = isUsernameField ? setUsername : setPassword;
+    const setError = isUsernameField ? setUsernameError : setPasswordError;
+    const error = isUsernameField ? usernameError : passwordError; 
+
+    setFieldValue(value);
+
+    if (error) {
+      setError('');
     }
-  };
+  }
 
   const handleSubmit = async (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage(null);
     const usernameValidationMessage = validateUsername(username);
+    const passwordValidationMessage = validatePassword(password);
+
     if (usernameValidationMessage) {
       setUsernameError(usernameValidationMessage);
     }
 
-    if (!usernameValidationMessage && !passwordError) {
+    if (passwordValidationMessage) {
+      setPasswordError(passwordValidationMessage);
+    }
+
+    if (!usernameValidationMessage && !passwordValidationMessage) {
       try {
         await login(username, password);
         push(Routes.PasswordHealth);
@@ -48,7 +66,8 @@ const Login = () => {
         <h1 className="text-center">Password Health</h1>
         <input
           value={username}
-          onChange={onUsernameChange}
+          id={FieldId.Username}
+          onChange={handleChange}
           placeholder="Username"
           type="text"
           className={'input mt-52px ' + (!!usernameError && 'input--invalid')}
@@ -56,10 +75,11 @@ const Login = () => {
         <ValidationMessage message={usernameError} />
         <input
           value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          id={FieldId.Password}
+          onChange={handleChange}
           placeholder="Password"
           type="password"
-          className="input mt-12px"
+          className={'input mt-12px ' + (!!passwordError && 'input--invalid')}
         />
         <ValidationMessage message={passwordError} />
         <ErrorBlock error={errorMessage} />
