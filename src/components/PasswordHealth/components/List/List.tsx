@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {IItem} from '~/services/getUserItems';
 import ItemIcon from './components/ItemIcon';
 import updateItem from '../../../../services/updateItem';
@@ -17,6 +17,12 @@ interface IUpdateModal {
 const UpdateModal: FC<IUpdateModal> = ({item}) => {
   const [showModal, setShowModal] = useState(false);
   const [newPass, setNewPass] = useState('');
+
+
+  // fix react-modal error on open
+  useEffect(() => {
+    Modal.setAppElement('body');
+  }, [])
 
   return (
     <>
@@ -67,8 +73,8 @@ const UpdateModal: FC<IUpdateModal> = ({item}) => {
 
 const List: FC<IList> = ({items}) => (
   <ul className="list">
-    {items.map((item) => (
-      <li className="item">
+    {items.map((item, index) => (
+      <li key={index} className="item">
         <ItemIcon title={item.title} />
         <div>
           <div className="title">{item.title}</div>
