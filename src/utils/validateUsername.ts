@@ -1,6 +1,10 @@
-import { USERNAME_VALIDATION_MESSAGES, MIN_USERNAME_LENGTH, MAX_USERNAME_LENGTH } from "./constants";
+import {
+  USERNAME_VALIDATION_MESSAGES,
+  MIN_USERNAME_LENGTH,
+  MAX_USERNAME_LENGTH
+} from '../components/Login/constants';
 
-export const validateUsername = (username: string) => {
+export const validateUsername = (username: string): string => {
   let message = '';
   const invalidChars = /\W/; // valid chars: numbers, letters, underscores
 

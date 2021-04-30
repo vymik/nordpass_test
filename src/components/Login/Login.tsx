@@ -6,8 +6,8 @@ import ErrorBlock from '../ErrorBlock';
 import ValidationMessage from '../ValidationMessage';
 import {FieldId} from './constants';
 import './login-style.scss';
-import {validatePassword} from './validatePassword';
-import {validateUsername} from './validateUsername';
+import {validatePassword} from '../../utils/validatePassword';
+import {validateUsername} from '../../utils/validateUsername';
 
 const Login = () => {
   const {push} = useHistory();

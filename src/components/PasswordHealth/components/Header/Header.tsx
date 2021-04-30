@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import { useHistory } from 'react-router-dom';
-import { Routes } from '~/constants';
-import {IItem} from "~/services/getUserItems";
+import {useHistory} from 'react-router-dom';
+import {Routes} from '~/constants';
+import {IItem} from '~/services/getUserItems';
 import logout from '../../../../services/logout';
 
 import './header-style.scss';
@@ -21,7 +21,7 @@ const Header: FC<IHeader> = ({items, username}) => {
     } catch (error) {
       alert(error);
     }
-  }
+  };
 
   return (
     <div className="header">
@@ -31,7 +31,7 @@ const Header: FC<IHeader> = ({items, username}) => {
       <h1>{`${items.length} Items are vulnerable`}</h1>
       <span>Create new complex passwords to protect your accounts</span>
     </div>
-  )
+  );
 };
 
 export default Header;

@@ -13,11 +13,20 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({items}) => {
-  const weakItemsCount = items.reduce((count, item) => (itemHasWeakPassword(item) ? count + 1 : count), 0);
+  const weakItemsCount = items.reduce(
+    (count, item) => (itemHasWeakPassword(item) ? count + 1 : count),
+    0
+  );
 
-  const reusedItemsCount = items.reduce((count, item) => (itemHasReusedPassword(item, items) ? count + 1 : count), 0);
+  const reusedItemsCount = items.reduce(
+    (count, item) => (itemHasReusedPassword(item, items) ? count + 1 : count),
+    0
+  );
 
-  const oldItemsCount = items.reduce((count, item) => (itemHasOldPassword(item) ? count + 1 : count), 0);
+  const oldItemsCount = items.reduce(
+    (count, item) => (itemHasOldPassword(item) ? count + 1 : count),
+    0
+  );
 
   return (
     <div className="filter">

@@ -19,7 +19,7 @@ const UserContext = createContext<IUser>({
   isLoading: true,
   username: null,
   email: null,
-  id: null,
+  id: null
 });
 
 export const useUserContext = () => useContext(UserContext);
@@ -38,7 +38,7 @@ export const UserContextProvider = ({ children }) => {
     try {
       const response = await fetch(getUrl(API.User), {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
 
@@ -52,7 +52,7 @@ export const UserContextProvider = ({ children }) => {
     }
 
     setIsLoading(false);
-  }
+  };
 
   const deleteData = () => {
     setErrorMessage(null);
@@ -63,7 +63,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-   updateUser();
+    updateUser();
   }, []);
 
   const value = {
@@ -73,14 +73,10 @@ export const UserContextProvider = ({ children }) => {
     isLoading,
     username,
     email,
-    id,
+    id
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  )
-}
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 
 export default UserContext;

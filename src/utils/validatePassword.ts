@@ -1,4 +1,4 @@
-import {MIN_PASSWORD_LENGTH, PASSWORD_VALIDATION_MESSAGES} from './constants';
+import {MIN_PASSWORD_LENGTH, PASSWORD_VALIDATION_MESSAGES} from '../components/Login/constants';
 
 export const validatePassword = (password: string): string => {
   let message = '';
