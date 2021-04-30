@@ -12,19 +12,15 @@ interface IFilter {
   items: Array<IItem>;
 }
 
-const Filter: FC<IFilter> = ({items}) => {
-  const weakItemsCount = items.reduce(
-    (count, item) => (itemHasWeakPassword(item) ? count + 1 : count),
-    0
-  );
+const countItems = (items: Array<IItem>, callback: (listItem: IItem) => boolean) => {
+  return items.reduce((count, item) => (callback(item) ? count + 1 : count), 0);
+};
 
+const Filter: FC<IFilter> = ({items}) => {
+  const weakItemsCount = countItems(items, itemHasWeakPassword);
+  const oldItemsCount = countItems(items, itemHasOldPassword);
   const reusedItemsCount = items.reduce(
     (count, item) => (itemHasReusedPassword(item, items) ? count + 1 : count),
-    0
-  );
-
-  const oldItemsCount = items.reduce(
-    (count, item) => (itemHasOldPassword(item) ? count + 1 : count),
     0
   );
 
