@@ -7,11 +7,7 @@ interface IFilterTab {
   path: string;
 }
 
-const FilterTab: FC<IFilterTab> = ({
-  title,
-  count,
-  path,
-}) => {
+const FilterTab: FC<IFilterTab> = ({title, count, path}) => {
   const {push} = useHistory();
 
   return (
@@ -19,6 +15,6 @@ const FilterTab: FC<IFilterTab> = ({
       {`${title} (${count})`}
     </div>
   );
-}
+};
 
-export default FilterTab
+export default FilterTab;

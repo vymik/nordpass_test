@@ -1,7 +1,7 @@
 import {FC, memo} from 'react';
 
 interface IErrorBlock {
-  error: String
+  error: String;
 }
 
 const ErrorBlock: FC<IErrorBlock> = ({error}) => {
@@ -9,11 +9,7 @@ const ErrorBlock: FC<IErrorBlock> = ({error}) => {
     return null;
   }
 
-  return (
-    <div>
-      {error}
-    </div>
-  )
-}
+  return <div>{error}</div>;
+};
 
 export default memo(ErrorBlock);

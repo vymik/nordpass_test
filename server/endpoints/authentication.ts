@@ -34,7 +34,6 @@ router.get('/api/login',timeout, (req, res) => {
 // deletes token
 router.get('/api/logout', (req, res) => {
   const token = req.headers.authorization?.split(' ')?.[1];
-
   if (token) {
     removeToken(token);
     res.status(200).send();
