@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { API } from '~/constants';
+import {createContext, useContext, useEffect, useState} from 'react';
+import {API} from '~/constants';
 import getUrl from '~/utils/getUrl';
 
 interface IUser {
@@ -24,7 +24,7 @@ const UserContext = createContext<IUser>({
 
 export const useUserContext = () => useContext(UserContext);
 
-export const UserContextProvider = ({ children }) => {
+export const UserContextProvider = ({children}) => {
   const [errorMessage, setErrorMessage] = useState<string>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [username, setUsername] = useState<string>(null);
@@ -42,11 +42,15 @@ export const UserContextProvider = ({ children }) => {
         }
       });
 
-      const data = await response.json();
+      if (response.status === 401) {
+        throw Error('Unauthorized');
+      } else if (response.status === 200) {
+        const data = await response.json();
 
-      setUsername(data?.username);
-      setEmail(data?.email);
-      setId(data?.id);
+        setUsername(data?.username);
+        setEmail(data?.email);
+        setId(data?.id);
+      }
     } catch (error) {
       setErrorMessage(error.message);
     }

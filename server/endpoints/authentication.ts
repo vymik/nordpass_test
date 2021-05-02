@@ -65,7 +65,7 @@ router.get('/api/user', (req, res) => {
     }
   }
 
-  res.status(401).json({message: 'Unauthorized'});
+  res.status(401).send();
 });
 
 export default router;
