@@ -8,10 +8,15 @@ const login = async (username: string, password: string) => {
   });
 
   const response = await fetch(url);
-  const data = await response.json();
-  const {token} = data;
 
-  localStorage.setItem('token', token);
+  if (response.status === 401) {
+    throw Error('Wrong username or password');
+  }
+  if (response.status === 200) {
+    const data = await response.json();
+    const {token} = data;
+    localStorage.setItem('token', token);
+  }
 };
 
 export default login;

@@ -37,7 +37,6 @@ router.get('/api/logout', (req, res) => {
   if (token) {
     removeToken(token);
     res.status(200).send();
-    res.redirect('/login');
     return;
   }
 
@@ -66,7 +65,7 @@ router.get('/api/user', (req, res) => {
     }
   }
 
-  res.status(401).send();
+  res.status(401).json({message: 'Unauthorized'});
 });
 
 export default router;
